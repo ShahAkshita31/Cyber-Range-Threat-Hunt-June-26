@@ -47,52 +47,6 @@ Evidence confirmed that the incident was a Business Email Compromise (BEC) invol
 
 ---
 
-## Timeline of Key Events
-
-## Timeline
-
-| **Flag** | **Action Observed** | **Key Evidence** |
-|----------|---------------------|------------------|
-| Flag 1 | The comprmised Principal | `m.smith@lognpacific.org` |
-| Flag 2 | The flagged source | `103.69.224.136` |
-| Flag 3 | The Client OS | `Linux` |
-| Flag 4 | The Stored Detection Type | `anonymizedIPAddress` |
-| Flag 5 | Audit the verdict | `dismissed` |
-| Flag 6 | Live Exposure| `Enabled` |
-| Flag 7 | How the session beat MFA | `singleFactorAuthentication` |
-| Flag 8 | The control surface that let them in | `One Outlook Web` |
-| Flag 9 | Failed Attempts before entry | `2`|
-| Flag 10 | Blast Radius of one token | `7` |
-| Flag 11 | One continuous session | `005d431a-380b-1f5e-e554-16d5010dc28e` |
-| Flag 12 | MFA-Posture profiling | `userRegistrationDetails` |
-| Flag 13 | Group Enumeration | `/v1.0/me/memberOf` |
-| Flag 14 | The Fraudulent Request | `Updated Banking Details - Pacific IT Monthly` |
-| Flag 15 | The thread they mined | `Q1 Vendor Payment Schedule - Review Required` |
-| Flag 16 | The Fraud Target | `j.reynolds@lognpacific.org ` |
-| Flag 17 | Second Channel Reinforcement | `Microsoft Teams` |
-| Flag 18 | The Concealment Rule | `Invoice Processing` |
-| Flag 19 | Whaere the Hidden Mail goes | `Hide replies without alerting the user` |
-| Flag 20 | The Exfiltration Rule | `merovingian1337@proton.me` |
-| Flag 21 | Who Both Rules Target| `Hide and monitor replies to the fraudulent payment request` |
-| Flag 22 | The Exfil Operation | FileDownloaded — distinguished from normal FileAccessed activity because it created a local copy of the file outside Microsoft 365, rather than simply viewing it within the service. |
-| Flag 23 | Volume Taken | 3 — the small number of downloads indicates focused exfiltration of specific documents, not opportunistic mass data theft.  |
-| Flag 24 | The Credential Document | `VPN-Access-Credentials.txt`|
-| Flag 25 | The Vault Pointer | `yomark.pdf` |
-| Flag 26 | Disapprove the Innocent Explaination | `0` |
-| Flag 27 | Catch the Plant | `Microsoft Flow Portal` |
-| Flag 28 | The cause behind the forward | `MicrosoftGraphActivityLogs` |
-| Flag 29 | Prove it with the sequence | `Graph Call` |
-| Flag 30 | The Automation source IP | `20.150.129.194 ` |
-| Flag 31 | The Automation Identity | `7ab7862c-4c57-491e-8a45-d52a7e023983 ` |
-| Flag 32 | Name the abused service | `Power Automate` |
-| Flag 33 | One Actor, Every Source | `7` |
-| Flag 34 | Containment Ordering | `Revoke user sessions` |
-| Flag 35 | Where the flow is removed | `Power Platform Admin Center` |
-| Flag 36 | The Control that never fired | CA was not applied, so the legacy client bypassed policy.  |
-| Flag 37 | Why Revoke before reset | Active refresh tokens survive a password reset; revoke user sessions first. |
-
----
-
 ## Starting Point – Review Incident 87241 in Microsoft Defender XDR to identify the affected user, suspicious sign-in, and initial evidence before pivoting to Sentinel for further investigation.
 
 **Objective:**
@@ -105,7 +59,7 @@ Determine whether the suspicious sign-in resulted in a Microsoft 365 account com
 SigninLogs
 	| where UserPrincipalName contains 'm.smith'
 	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
-  | project TimeGenerated, UserPrincipalName, IPAddress
+  	| project TimeGenerated, UserPrincipalName, IPAddress
 	| order by TimeGenerated desc
 ```
 <img width="2041" height="474" alt="Screenshot 2025-11-14 194024" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/1%20and%202.png" />
@@ -122,10 +76,11 @@ SigninLogs
 SigninLogs
 	| where UserPrincipalName contains 'm.smith'
 	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
-  | project TimeGenerated, UserPrincipalName, IPAddress
+  	| project TimeGenerated, UserPrincipalName, IPAddress
 	| order by TimeGenerated desc
 ```
 <img width="2041" height="474" alt="Screenshot 2025-11-14 194024" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/1%20and%202.png" />
+
 - **Final Finding:** Compromised principal identified `m.smith@lognpacific.org`.
 
 ### Flag 2 – The Flagged Source
@@ -136,10 +91,11 @@ SigninLogs
 SigninLogs
 	| where UserPrincipalName contains 'm.smith'
 	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
-  | project TimeGenerated, UserPrincipalName, IPAddress
+  	| project TimeGenerated, UserPrincipalName, IPAddress
 	| order by TimeGenerated desc
 ```
 <img width="2041" height="474" alt="Screenshot 2025-11-14 194024" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/1%20and%202.png" />
+
 - **Final Finding:** Source IP identified as `103.69.224.136`.
 
 ### Flag 3 – The Client OS
@@ -151,9 +107,10 @@ SigninLogs
 	| where UserPrincipalName == "m.smith@lognpacific.org"
 	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
 	| project TimeGenerated, IPAddress, UserAgent, DeviceDetail, AppDisplayName
-  | order by TimeGenerated desc
+  	| order by TimeGenerated desc
 ```
 <img width="1500" height="532" alt="flag3" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/3.png" />
+
 - **Final Finding:** The suspicious sign-in originated from a `Linux` client.
 
 ### Flag 4 – The Stored Detection Type
@@ -180,12 +137,14 @@ AADUserRiskEvents
 	| project TimeGenerated, UserPrincipalName, IpAddress, RiskEventType, RiskLevel, RiskState
 ```
 <img width="2144" height="474" alt="flag4" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/4.png" />
+
 - **Final Finding:** The risk detection associated with the compromised account was in the `Dismissed` state.
 
 ### Flag 6 – Live Exposure
 - **Objective:** Determine the status of the compromised user account from the incident asset.
 - **Data Source:** Microsoft Defender XDR Incident Asset
 <img width="2057" height="303" alt="flag6" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/6.png" />
+
 - **Final Finding:** The compromised user account was in an `Enabled` state at the time of the investigation.
 
 ### Flag 7 – How the Session beat MFA
@@ -194,12 +153,13 @@ AADUserRiskEvents
 - **Investigation query:**
 ```
 SigninLogs 
-  | where IPAddress == "103.69.224.136" and UserPrincipalName contains "m.smith" 
+	| where IPAddress == "103.69.224.136" and UserPrincipalName contains "m.smith" 
 	| where ResultSignature == 'SUCCESS'
 	| project TimeGenerated, UserPrincipalName, IPAddress,AuthenticationRequirement, ConditionalAccessStatus 
-  | order by TimeGenerated asc
+	| order by TimeGenerated asc
 ```
 <img width="2507" height="492" alt="flag7" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/7.png" />
+
 - **Final Finding:**  The successful sign-in used `singleFactorAuthentication`, indicating the session bypassed an additional MFA challenge despite tenant-wide MFA enforcement.
 
 ### Flag 8 – Control surface that let them in
@@ -211,9 +171,10 @@ SigninLogs
 	| where IPAddress == "103.69.224.136" and UserPrincipalName contains "m.smith"
 	| where ResultSignature == 'SUCCESS'
 	| project TimeGenerated, UserPrincipalName, IPAddress,AuthenticationRequirement, AppDisplayName
-  | order by TimeGenerated asc
+  	| order by TimeGenerated asc
 ```
 <img width="1948" height="490" alt="flag8" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/8.png" />
+
 - **Final Finding:** The first successful sign-in occurred through `One Outlook Web`.
 
 ### Flag 9 – Failed Attempts before Entry.
@@ -224,9 +185,10 @@ SigninLogs
 	SigninLogs
 	| where IPAddress == "103.69.224.136" and AlternateSignInName == "m.smith@lognpacific.org"
 	| where AppDisplayName contains "One Outlook Web"
-  | project TimeGenerated,Identity, ResultSignature
+  	| project TimeGenerated,Identity, ResultSignature
 ```
 <img width="2016" height="460" alt="flag9" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/9.png" />
+
 - **Final Finding:** `Two` bad-password attempts were observed before the successful sign-in.
 
 ### Flag 10 – Blast Radius of one token
@@ -238,9 +200,10 @@ SigninLogs
 	| where IPAddress == "103.69.224.136" and UserPrincipalName contains "m.smith"
 	| where ResultSignature == 'SUCCESS'
 	| where TimeGenerated >= datetime(2026-06-10 23:16:05)
-  | summarize DistinctApps=dcount(AppDisplayName)
+  	| summarize DistinctApps=dcount(AppDisplayName)
 ```
 <img width="1955" height="559" alt="flag10&#39;1" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/10.png" />
+
 - **Final Finding:** `Seven` distinct Microsoft 365 applications were accessed after the first successful sign-in, demonstrating the scope of activity enabled by the compromised session. 
 
 ### Flag 11 – Bundling / Staging Artifacts
