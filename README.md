@@ -51,264 +51,197 @@ Evidence confirmed that the incident was a Business Email Compromise (BEC) invol
 
 ## Timeline
 
-| **Time (UTC)** | **Flag** | **Action Observed** | **Key Evidence** |
-|----------------|----------|---------------------|------------------|
-| *2025-10-09T12:22:27.6588913Z* | Flag 1 | The comprmised Principal | `m.smith@lognpacific.org` |
-| *2025-10-09T12:34:59.1260624Z* | Flag 2 | The flagged source | `103.69.224.136` |
-| *2025-10-09T12:50:39.955931Z* | Flag 3 | The Client OS | `Linux` |
-| *2025-10-09T12:51:44.3425653Z* | Flag 4 | The Stored Detection Type | `anonymizedIPAddress` |
-| *2025-10-09T12:51:18.3848072Z* | Flag 5 | Audit the verdict | `dismissed` |
-| *2025-10-09T12:51:32.5900538Z* | Flag 6 | Live Exposure| `Enabled` |
-| *2025-10-09T12:50:58.3174145Z* | Flag 7 | How the session beat MFA | `singleFactorAuthentication` |
-| *2025-10-09T12:51:57.6399526Z* | Flag 8 | The control surface that let them in | `One Outlook Web` |
-| *2025-10-09T12:52:14.3135459Z* | Flag 9 | Failed Attempts before entry | `2`|
-| *2025-10-09T12:55:05.7658713Z* | Flag 10 | Blast Radius of one token | `7` |
-| *2025-10-09T12:58:17.4364257Z* | Flag 11 | One continuous session | `005d431a-380b-1f5e-e554-16d5010dc28e` |
-| *2025-10-09T13:00:40.045127Z* | Flag 12 | MFA-Posture profiling | `userRegistrationDetails` |
-| *2025-10-09T13:01:28.7700443Z* | Flag 13 | Group Enumeration | `/v1.0/me/memberOf` |
-|  | Flag 14 | The Fraudulent Request | `Updated Banking Details - Pacific IT Monthly` |
-| *2025-10-09T13:02:41.5698148Z* | Flag 15 | The thread they mined | `Q1 Vendor Payment Schedule - Review Required` |
-| *2025-10-09T12:22:27.6588913Z* | Flag 16 | The Fraud Target | `j.reynolds@lognpacific.org ` |
-| *2025-10-09T12:34:59.1260624Z* | Flag 17 | Second Channel Reinforcement | `Microsoft Teams` |
-| *2025-10-09T12:50:39.955931Z* | Flag 18 | The Concealment Rule | `Invoice Processing` |
-| *2025-10-09T12:51:44.3425653Z* | Flag 19 | Whaere the Hidden Mail goes | `Hide replies without alerting the user` |
-| *2025-10-09T12:51:18.3848072Z* | Flag 20 | The Exfiltration Rule | `merovingian1337@proton.me` |
-| *2025-10-09T12:51:32.5900538Z* | Flag 21 | Who Both Rules Target| `Hide and monitor replies to the fraudulent payment request` |
-| *2025-10-09T12:50:58.3174145Z* | Flag 22 | The Exfil Operation | FileDownloaded — distinguished from normal FileAccessed activity because it created a local copy of the file outside Microsoft 365, rather than simply viewing it within the service. |
-| *2025-10-09T12:51:57.6399526Z* | Flag 23 | Volume Taken | 3 — the small number of downloads indicates focused exfiltration of specific documents, not opportunistic mass data theft.  |
-| *2025-10-09T12:52:14.3135459Z* | Flag 24 | The Credential Document | `VPN-Access-Credentials.txt`|
-| *2025-10-09T12:55:05.7658713Z* | Flag 25 | The Vault Pointer | `yomark.pdf` |
-| *2025-10-09T12:58:17.4364257Z* | Flag 26 | Disapprove the Innocent Explaination | `0` |
-| *2025-10-09T13:00:40.045127Z* | Flag 27 | Catch the Plant | `Microsoft Flow Portal` |
-| *2025-10-09T13:01:28.7700443Z* | Flag 28 | The cause behind the forward | `MicrosoftGraphActivityLogs` |
-|  | Flag 29 | Prove it with the sequence | `Graph Call` |
-| *2025-10-09T13:02:41.5698148Z* | Flag 30 | The Automation source IP | `20.150.129.194 ` |
-| *2025-10-09T12:22:27.6588913Z* | Flag 31 | The Automation Identity | `7ab7862c-4c57-491e-8a45-d52a7e023983 ` |
-| *2025-10-09T12:34:59.1260624Z* | Flag 32 | Name the abused service | `Power Automate` |
-| *2025-10-09T12:50:39.955931Z* | Flag 33 | One Actor, Every Source | `7` |
-| *2025-10-09T12:51:44.3425653Z* | Flag 34 | Containment Ordering | `Revoke user sessions` |
-| *2025-10-09T12:51:18.3848072Z* | Flag 35 | Where the flow is removed | `Power Platform Admin Center` |
-| *2025-10-09T12:51:32.5900538Z* | Flag 36 | The Control that never fired | CA was not applied, so the legacy client bypassed policy.  |
-| *2025-10-09T12:50:58.3174145Z* | Flag 37 | Why Revoke before reset | Active refresh tokens survive a password reset; revoke user sessions first. |
+| **Flag** | **Action Observed** | **Key Evidence** |
+|----------|---------------------|------------------|
+| Flag 1 | The comprmised Principal | `m.smith@lognpacific.org` |
+| Flag 2 | The flagged source | `103.69.224.136` |
+| Flag 3 | The Client OS | `Linux` |
+| Flag 4 | The Stored Detection Type | `anonymizedIPAddress` |
+| Flag 5 | Audit the verdict | `dismissed` |
+| Flag 6 | Live Exposure| `Enabled` |
+| Flag 7 | How the session beat MFA | `singleFactorAuthentication` |
+| Flag 8 | The control surface that let them in | `One Outlook Web` |
+| Flag 9 | Failed Attempts before entry | `2`|
+| Flag 10 | Blast Radius of one token | `7` |
+| Flag 11 | One continuous session | `005d431a-380b-1f5e-e554-16d5010dc28e` |
+| Flag 12 | MFA-Posture profiling | `userRegistrationDetails` |
+| Flag 13 | Group Enumeration | `/v1.0/me/memberOf` |
+| Flag 14 | The Fraudulent Request | `Updated Banking Details - Pacific IT Monthly` |
+| Flag 15 | The thread they mined | `Q1 Vendor Payment Schedule - Review Required` |
+| Flag 16 | The Fraud Target | `j.reynolds@lognpacific.org ` |
+| Flag 17 | Second Channel Reinforcement | `Microsoft Teams` |
+| Flag 18 | The Concealment Rule | `Invoice Processing` |
+| Flag 19 | Whaere the Hidden Mail goes | `Hide replies without alerting the user` |
+| Flag 20 | The Exfiltration Rule | `merovingian1337@proton.me` |
+| Flag 21 | Who Both Rules Target| `Hide and monitor replies to the fraudulent payment request` |
+| Flag 22 | The Exfil Operation | FileDownloaded — distinguished from normal FileAccessed activity because it created a local copy of the file outside Microsoft 365, rather than simply viewing it within the service. |
+| Flag 23 | Volume Taken | 3 — the small number of downloads indicates focused exfiltration of specific documents, not opportunistic mass data theft.  |
+| Flag 24 | The Credential Document | `VPN-Access-Credentials.txt`|
+| Flag 25 | The Vault Pointer | `yomark.pdf` |
+| Flag 26 | Disapprove the Innocent Explaination | `0` |
+| Flag 27 | Catch the Plant | `Microsoft Flow Portal` |
+| Flag 28 | The cause behind the forward | `MicrosoftGraphActivityLogs` |
+| Flag 29 | Prove it with the sequence | `Graph Call` |
+| Flag 30 | The Automation source IP | `20.150.129.194 ` |
+| Flag 31 | The Automation Identity | `7ab7862c-4c57-491e-8a45-d52a7e023983 ` |
+| Flag 32 | Name the abused service | `Power Automate` |
+| Flag 33 | One Actor, Every Source | `7` |
+| Flag 34 | Containment Ordering | `Revoke user sessions` |
+| Flag 35 | Where the flow is removed | `Power Platform Admin Center` |
+| Flag 36 | The Control that never fired | CA was not applied, so the legacy client bypassed policy.  |
+| Flag 37 | Why Revoke before reset | Active refresh tokens survive a password reset; revoke user sessions first. |
 
 ---
 
-## Starting Point – Identifying the Initial System
+## Starting Point – Review Incident 87241 in Microsoft Defender XDR to identify the affected user, suspicious sign-in, and initial evidence before pivoting to Sentinel for further investigation.
 
 **Objective:**
-Determine where to begin hunting based on the provided indicators that remote support tools and helpdesk-related files were recently accessed and executed from the Downloads folder during early October.
+Determine whether the suspicious sign-in resulted in a Microsoft 365 account compromise, assess attacker activity and persistence mechanisms, identify potential data exfiltration, and evaluate indicators of Business Email Compromise (BEC).
 
-- **Host of Interest:** `gab-intern-vm`  
-- **Why:** This device showed the clearest pattern of suspicious support-tool executions from the Downloads folder on October 9th, 2025, at 12:22 PM, matching the initial compromise pattern.
-- **KQL Query Used:**
+- **Host of Interest:** `m.smith@lognpacific.org`  
+- **Why:** Primary compromised Microsoft 365 identity associated with Incident 87241 and all subsequent malicious activity.
+- **Investigation Used:**
 ```
-DeviceProcessEvents
-| where TimeGenerated between(datetime(2025-10-01)..datetime(2025-10-15))
-| where FolderPath has @"\Downloads\" or ProcessCommandLine has @"\Downloads\"
-| where ProcessCommandLine matches regex @"(?i)(support|help|desk|tool)"
-    or FileName matches regex @"(?i)(support|help|desk|tool)"
-    or FolderPath matches regex @"(?i)(support|help|desk|tool)"
-| project TimeGenerated, DeviceName, FileName, FolderPath, 
-          ProcessCommandLine, InitiatingProcessFileName,
-          InitiatingProcessCommandLine
-| order by TimeGenerated asc
+SigninLogs
+	| where UserPrincipalName contains 'm.smith'
+	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
+  | project TimeGenerated, UserPrincipalName, IPAddress
+	| order by TimeGenerated desc
 ```
-<img width="2041" height="474" alt="Screenshot 2025-11-14 194024" src="https://github.com/user-attachments/assets/146c8791-0df3-4c38-bf4a-004b35ed6439" />
+<img width="2041" height="474" alt="Screenshot 2025-11-14 194024" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/1%20and%202.png" />
 
 ---
 
 ## Flag Analysis
 
-### Flag 1 – Initial Execution Point
-- **Objective:** Identify the first CLI parameter used during initial execution.
-- **Hypothesis:** Malicious actors often launch scripts with non-default execution policies.
-- **KQL Query Used:**
+### Flag 1 – The Compromised Principal
+- **Objective:** Identify the compromised user account (UPN).
+- **Data Source:** SigninLogs
+- **Investigation query:**
 ```
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated  between (datetime(2025-10-01) .. datetime(2025-10-15))
-| where FolderPath has @"\Downloads\" or ProcessCommandLine has @"\Downloads\"
-| project TimeGenerated, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine, SHA256
-| order by TimeGenerated asc
-| take 20
+SigninLogs
+	| where UserPrincipalName contains 'm.smith'
+	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
+  | project TimeGenerated, UserPrincipalName, IPAddress
+	| order by TimeGenerated desc
 ```
-<img width="1933" height="498" alt="flag1" src="https://github.com/user-attachments/assets/b02fff14-dd90-4594-aafb-4fd5c8cbed9a" />
+<img width="2041" height="474" alt="Screenshot 2025-11-14 194024" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/1%20and%202.png" />
+- **Final Finding:** Compromised principal identified `m.smith@lognpacific.org`.
 
-- **Evidence Collected:** `-ExecutionPolicy` in CLI
-- **Final Finding:** The attack began with PowerShell launched from Downloads using the `-ExecutionPolicy` argument.
+### Flag 2 – The Flagged Source
+- **Objective:** Identify the source IP associated with Entra ID risk event.
+- **Data Source:** SigninLogs
+- **Investigation query:**
+```
+SigninLogs
+	| where UserPrincipalName contains 'm.smith'
+	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
+  | project TimeGenerated, UserPrincipalName, IPAddress
+	| order by TimeGenerated desc
+```
+<img width="2041" height="474" alt="Screenshot 2025-11-14 194024" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/1%20and%202.png" />
+- **Final Finding:** Source IP identified as `103.69.224.136`.
 
-### Flag 2 – Defense Disabling
-- **Objective:** Identify files related to simulated security posture changes.
-- **Hypothesis:** Creation of tamper artifacts indicates intent to bypass defenses.
-- **KQL Query Used:**
+### Flag 3 – The Client OS
+- **Objective:** Identify the operating system used during the suspicious sign-in.
+- **Data Source:** SigninLogs
+- **Investigation query:**
 ```
-DeviceFileEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated  between (datetime(2025-10-09T12:20:00Z)..datetime(2025-10-09T13:00:00Z))
-| where InitiatingProcessFileName in ("powershell.exe", "explorer.exe", "notepad.exe") and FileName contains "tamper"
-| project TimeGenerated, FileName, FolderPath, InitiatingProcessFileName, InitiatingProcessCommandLine
-| order by TimeGenerated asc
+SigninLogs
+	| where UserPrincipalName == "m.smith@lognpacific.org"
+	| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
+	| project TimeGenerated, IPAddress, UserAgent, DeviceDetail, AppDisplayName
+  | order by TimeGenerated desc
 ```
-<img width="1993" height="553" alt="flag2" src="https://github.com/user-attachments/assets/eaaf8938-a8a6-49ae-b7e2-4b7abba181b5" />
+<img width="1500" height="532" alt="flag3" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/3.png" />
+- **Final Finding:** The suspicious sign-in originated from a `Linux` client.
 
-- **Evidence Collected:** `DefenderTamperArtifact.lnk`
-- **Final Finding:** Malicious actor staged a tamper artifact to simulate security changes.
+### Flag 4 – The Stored Detection Type
+- **Objective:** Identify the stored Entra ID risk detection type associated with the suspicious sign-in.
+- **Data Source:** AADUserRiskEvents
+- **Investigation query:**
+```
+AADUserRiskEvents
+	| where TimeGenerated between (datetime(2026-06-10 23:00:00) .. datetime(2026-06-11 04:00:00))
+	| where UserPrincipalName has "m.smith" or IpAddress == "103.69.224.136"
+	| project TimeGenerated, UserPrincipalName, IpAddress, RiskEventType, RiskLevel, RiskState
+```
+<img width="2144" height="474" alt="flag4" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/4.png" />
+- **Final Finding:** The Entra ID Protection event classified the suspicious activity as `anonymizedIPAddress`.
 
-### Flag 3 – Quick Data Probe
-- **Objective:** Detect opportunistic access to sensitive data sources.
-- **Hypothesis:** Short-lived clipboard probes are common pre-collection steps.
-- **KQL Query Used:**
+### Flag 5 – Audit the verdict
+- **Objective:** Determine the final state of the Entra ID risk detections associated with the compromised account.
+- **Data Source:** AADUserRiskEvents
+- **Investigation query:**
 ```
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated  between (datetime(2025-10-09T12:20:00Z)..datetime(2025-10-09T13:00:00Z))
-| where ProcessCommandLine has "Get-Clipboard" or ProcessCommandLine has "clip.exe" or ProcessCommandLine has "Get-Clip"
-| project TimeGenerated, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine
-| order by TimeGenerated asc
+AADUserRiskEvents
+	| where TimeGenerated between (datetime(2026-06-10 23:00:00) .. datetime(2026-06-11 04:00:00))
+	| where UserPrincipalName has "m.smith" or IpAddress == "103.69.224.136"
+	| project TimeGenerated, UserPrincipalName, IpAddress, RiskEventType, RiskLevel, RiskState
 ```
-<img width="1500" height="532" alt="flag3" src="https://github.com/user-attachments/assets/0a4b365a-fd89-4c95-aa1b-e7eabf20640e" />
+<img width="2144" height="474" alt="flag4" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/4.png" />
+- **Final Finding:** The risk detection associated with the compromised account was in the `Dismissed` state.
 
-- **Evidence Collected:** `"powershell.exe" -NoProfile -Sta -Command "try { Get-Clipboard | Out-Null } catch { }"`
-- **Final Finding:** Early-stage reconnaissance probed clipboard content.
+### Flag 6 – Live Exposure
+- **Objective:** Determine the status of the compromised user account from the incident asset.
+- **Data Source:** Microsoft Defender XDR Incident Asset
+<img width="2057" height="303" alt="flag6" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/6.png" />
+- **Final Finding:** The compromised user account was in an `Enabled` state at the time of the investigation.
 
-### Flag 4 – Host Context Recon
-- **Objective:** Identify basic host and user context collection.
-- **Hypothesis:** Actors gather environment and account information before further actions.
-- **KQL Query Used:**
+### Flag 7 – How the Session beat MFA
+- **Objective:** Identify the authentication method that allowed the attacker to access the account despite MFA enforcement.
+- **Data Source:** SigninLogs
+- **Investigation query:**
 ```
-let startTime = datetime(2025-10-01);
-let endTime   = datetime(2025-10-15);
-let recon_terms = dynamic(["qwinsta","quser","query user","query"]);
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated between (startTime .. endTime)
-| where ProcessCommandLine has_any (recon_terms) or FileName has_any (recon_terms)
-| project TimeGenerated, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine, InitiatingProcessAccountName
-| order by TimeGenerated desc
+SigninLogs 
+  | where IPAddress == "103.69.224.136" and UserPrincipalName contains "m.smith" 
+	| where ResultSignature == 'SUCCESS'
+	| project TimeGenerated, UserPrincipalName, IPAddress,AuthenticationRequirement, ConditionalAccessStatus 
+  | order by TimeGenerated asc
 ```
-<img width="2144" height="474" alt="flag4" src="https://github.com/user-attachments/assets/33b5e62a-54d4-42ab-ae05-7084b420484e" />
+<img width="2507" height="492" alt="flag7" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/7.png" />
+- **Final Finding:**  The successful sign-in used `singleFactorAuthentication`, indicating the session bypassed an additional MFA challenge despite tenant-wide MFA enforcement.
 
-- **Evidence Collected:** 2025-10-09T12:51:44.3425653Z
-- **Final Finding:** Host context enumeration occurred on 2025-10-09.
+### Flag 8 – Control surface that let them in
+- **Objective:** Identify the application through which the attacker successfully authenticated.
+- **Data Source:** SigninLogs
+- **Investigation query:**
+```
+	SigninLogs
+	| where IPAddress == "103.69.224.136" and UserPrincipalName contains "m.smith"
+	| where ResultSignature == 'SUCCESS'
+	| project TimeGenerated, UserPrincipalName, IPAddress,AuthenticationRequirement, AppDisplayName
+  | order by TimeGenerated asc
+```
+<img width="1948" height="490" alt="flag8" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/8.png" />
+- **Final Finding:** The first successful sign-in occurred through `One Outlook Web`.
 
-### Flag 5 – Storage Surface Mapping
-- **Objective:** Detect discovery of local/network storage.
-- **Hypothesis:** Enumeration of storage locations precedes collection.
-- **KQL Query Used:**
+### Flag 9 – Failed Attempts before Entry.
+- **Objective:** Determine the number of failed password attempts from the attacker IP before the successful sign-in.
+- **Data Source:** SigninLogs
+- **Investigation query:**
 ```
-let storage_terms = dynamic(["get", "wmic"]);
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated  between (datetime(2025-10-09T12:20:00Z)..datetime(2025-10-09T13:00:00Z))
-| where ProcessCommandLine has_any (storage_terms) or FileName has_any (storage_terms)
-| project TimeGenerated, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessAccountName
-| order by TimeGenerated asc
+	SigninLogs
+	| where IPAddress == "103.69.224.136" and AlternateSignInName == "m.smith@lognpacific.org"
+	| where AppDisplayName contains "One Outlook Web"
+  | project TimeGenerated,Identity, ResultSignature
 ```
-<img width="2072" height="493" alt="flag5" src="https://github.com/user-attachments/assets/123b9e08-0d1f-4a72-a831-b617aa9f58cf" />
+<img width="2016" height="460" alt="flag9" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/9.png" />
+- **Final Finding:** `Two` bad-password attempts were observed before the successful sign-in.
 
-- **Evidence Collected:** `"cmd.exe" /c wmic logicaldisk get name,freespace,size`
-- **Final Finding:** Local storage enumeration detected.
-
-### Flag 6 – Connectivity & Name Resolution Check
-- **Objective:** Detect outward connectivity and DNS checks.
-- **Hypothesis:** Actors validate egress before exfiltration.
-- **KQL Query Used:**
+### Flag 10 – Blast Radius of one token
+- **Objective:** Determine how many Microsoft 365 applications were accessed using the compromised session.
+- **Data Source:** SigninLogs
+- **Investigation query:**
 ```
-let net_terms = dynamic(["nslookup","ping","tracert","curl","wget"]);
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated between (datetime(2025-10-09T12:45:00Z) .. datetime(2025-10-09T13:10:00Z))
-| where ProcessCommandLine has_any (net_terms) or FileName has_any (net_terms)
-| project TimeGenerated, FileName, InitiatingProcessParentFileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine, InitiatingProcessAccountName
-| order by TimeGenerated asc
+	SigninLogs
+	| where IPAddress == "103.69.224.136" and UserPrincipalName contains "m.smith"
+	| where ResultSignature == 'SUCCESS'
+	| where TimeGenerated >= datetime(2026-06-10 23:16:05)
+  | summarize DistinctApps=dcount(AppDisplayName)
 ```
-<img width="2057" height="303" alt="flag6" src="https://github.com/user-attachments/assets/0e8f4bb0-afbc-4172-97ca-e0bd4c8c08e0" />
-
-- **Evidence Collected:** `RuntimeBroker.exe`
-- **Final Finding:** Connectivity validation performed via RuntimeBroker.
-
-### Flag 7 – Interactive Session Discovery
-- **Objective:** Detect enumeration of active user sessions.
-- **Hypothesis:** Actors gather active session info to guide attack timing.
-- **KQL Query Used:**
-```
-let session_terms = dynamic(["qwinsta", "quser", "query user", "query session", "whoami", "session"]);
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated between(datetime(2025-10-09T12:20:00Z)..datetime(2025-10-09T13:10:00Z))
-| where ProcessCommandLine has_any (session_terms) or FileName has_any (session_terms)
-| project TimeGenerated, FileName, ProcessCommandLine, InitiatingProcessCommandLine, InitiatingProcessFileName, InitiatingProcessUniqueId
-| order by TimeGenerated asc
-```
-<img width="2507" height="492" alt="flag7" src="https://github.com/user-attachments/assets/dc87acab-2627-428c-8ae9-d2b63a66875d" />
-
-- **Evidence Collected:** `2533274790397065`
-- **Final Finding:** PowerShell process uniquely identified for session enumeration.
-
-### Flag 8 – Runtime Application Inventory
-- **Objective:** Detect enumeration of running processes/services.
-- **Hypothesis:** Process inventory informs potential collection targets.
-- **KQL Query Used:**
-```
-let search_terms = dynamic(["Get-Process", "sc", "Get-Service", "net start", "tasklist"]);
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated between(datetime(2025-10-09T12:20:00Z)..datetime(2025-10-09T14:10:00Z))
-| where ProcessCommandLine has_any (search_terms)
-| project TimeGenerated, FileName, ProcessCommandLine, InitiatingProcessCommandLine, InitiatingProcessFileName
-| order by TimeGenerated asc
-```
-<img width="1948" height="490" alt="flag8" src="https://github.com/user-attachments/assets/dff79a90-044a-4ac0-b7a1-b7edc6da8439" />
-
-- **Evidence Collected:** `tasklist.exe`
-- **Final Finding:** Runtime application inventory confirmed.
-
-### Flag 9 – Privilege Surface Check
-- **Objective:** Detect privilege discovery attempts.
-- **Hypothesis:** Mapping privileges informs subsequent escalation strategy.
-- **KQL Query Used:**
-```
-let search_terms = dynamic(["whoami", "net user"]);
-DeviceProcessEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated between(datetime(2025-10-09T12:20:00Z)..datetime(2025-10-09T14:10:00Z))
-| where ProcessCommandLine has_any (search_terms)
-| project TimeGenerated, FileName, ProcessCommandLine, InitiatingProcessCommandLine, InitiatingProcessFileName
-| order by TimeGenerated asc
-```
-<img width="2016" height="460" alt="flag9" src="https://github.com/user-attachments/assets/6c586b8f-c0e1-4a0b-b5cb-0b9f2473fe82" />
-
-- **Evidence Collected:** 2025-10-09T12:52:14.3135459Z
-- **Final Finding:** Privilege enumeration detected via PowerShell.
-
-### Flag 10 – Proof-of-Access & Egress Validation
-- **Objective:** Detect outbound reachability validation and host state capture.
-- **Hypothesis:** Actors combine network checks with host artifacts before exfiltration.
-- **KQL Query Used:**
-```
-DeviceFileEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated between(datetime(2025-10-09T12:50:00Z)..datetime(2025-10-09T13:00:00Z))
-| where FileName contains "support" or FolderPath contains "support"
-| project TimeGenerated, FileName, FolderPath, ActionType, InitiatingProcessFileName
-| order by TimeGenerated asc
-```
-<img width="1955" height="559" alt="flag10&#39;1" src="https://github.com/user-attachments/assets/dfba1408-3be5-4cba-949d-c5f8022caa21" />
-
-```
-DeviceNetworkEvents
-| where DeviceName == "gab-intern-vm"
-| where TimeGenerated between(datetime(2025-10-09T12:50:00Z)..datetime(2025-10-09T13:00:00Z))
-| where ActionType == "ConnectionSuccess" 
-| where RemoteIP has "."  
-| where RemoteUrl !has "microsoft" and RemoteUrl !has "windows"
-| project TimeGenerated, InitiatingProcessFileName, RemoteIP, RemoteUrl, RemotePort, InitiatingProcessCommandLine
-| order by TimeGenerated asc
-```
-<img width="2464" height="423" alt="flag10&#39;2" src="https://github.com/user-attachments/assets/1292a5ee-cfa7-4403-913e-67c6b0a4cf6a" />
-
-- **Evidence Collected:** First outbound: `www.msftconnecttest.com`
-- **Final Finding:** Outbound reachability confirmed post-artifact creation.
+<img width="1955" height="559" alt="flag10&#39;1" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/10.png" />
+- **Final Finding:** `Seven` distinct Microsoft 365 applications were accessed after the first successful sign-in, demonstrating the scope of activity enabled by the compromised session. 
 
 ### Flag 11 – Bundling / Staging Artifacts
 - **Objective:** Detect consolidation of artifacts for transfer.
