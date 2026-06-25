@@ -408,8 +408,8 @@ OfficeActivity
 	| summarize count() by Operation
 	| order by count_ desc
 ```
-<img width="2549" height="279" alt="flag13" src="<img width="365" height="237" alt="image" src="https://github.com/user-attachments/assets/b777b12a-b568-48dc-b338-1a70f2a303e8" />
-" />
+<img width="365" height="237" alt="image" src="https://github.com/user-attachments/assets/b777b12a-b568-48dc-b338-1a70f2a303e8" />
+
 
 - **Final Finding:** The attacker used the `FileDownloaded` operation to copy files from SharePoint and OneDrive to the local device. Unlike FileAccessed, which only records files being viewed within Microsoft 365, FileDownloaded indicates that a local copy of the file was created, making it evidence of data exfiltration.
   
@@ -424,8 +424,8 @@ OfficeActivity
 	| summarize count() by Operation
 	| order by count_ desc
 ```
-<img width="2549" height="279" alt="flag13" src="<img width="365" height="237" alt="image" src="https://github.com/user-attachments/assets/5fb748a0-a536-4807-8e70-69c2643e6c94" />
-" />
+<img width="365" height="237" alt="image" src="https://github.com/user-attachments/assets/5fb748a0-a536-4807-8e70-69c2643e6c94" />
+
 
 - **Final Finding:** `3 — the small number of downloads indicates focused exfiltration of specific documents, not opportunistic mass data theft`.
 
@@ -510,7 +510,7 @@ MicrosoftGraphActivityLogs
 
 ### Flag 29 – Prove it with the sequence
 - **Objective:** Determine whether the Microsoft Graph call or the mail event occurred first.
-
+- 
 - **Final Finding:** The Microsoft `Graph call` occurred first, initiating the email forward. The corresponding mail event was generated afterward to record the resulting message.
 
   ### Flag 30 – Automation Source IP
@@ -522,7 +522,6 @@ MicrosoftGraphActivityLogs
 	| where UserAgent has_any ("microsoft-flow", "azure-logic-apps") and RequestUri contains "forward"
 	| project TimeGenerated, IPAddress, UserAgent, RequestUri
 	| order by TimeGenerated asc
-
 ```
 <img width="2507" height="492" alt="flag7" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/30.png" />
 
@@ -558,8 +557,8 @@ MicrosoftGraphActivityLogs
 	| where TimeGenerated between (datetime(2026-06-10) .. datetime(2026-06-20 23:59:59))
 	| summarize by $table
 ```
-<img width="2507" height="492" alt="flag7" src="<img width="467" height="446" alt="33" src="https://github.com/user-attachments/assets/c255bd64-2d59-4697-946b-8a6ff1b6c583" />
-" />
+<img width="467" height="446" alt="33" src="https://github.com/user-attachments/assets/c255bd64-2d59-4697-946b-8a6ff1b6c583" />
+
 
 - **Final Finding:** The attacker IP appeared across `seven` distinct tables, demonstrating consistent evidence of activity throughout the investigation.
 
