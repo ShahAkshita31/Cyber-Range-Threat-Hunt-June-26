@@ -15,8 +15,6 @@
 
 ## Executive Summary
 
-### Executive Summary
-
 A **low-severity Entra ID Protection alert** involving **[m.smith@lognpacific.org](mailto:m.smith@lognpacific.org)** was investigated and confirmed to be a successful Microsoft 365 account compromise. The attacker gained access through a valid authenticated session after Conditional Access controls were not applied, allowing them to operate within the environment without triggering additional authentication challenges.
 
 **Key Findings:**
@@ -167,6 +165,7 @@ AADUserRiskEvents
 	| project TimeGenerated, UserPrincipalName, IpAddress, RiskEventType, RiskLevel, RiskState
 ```
 <img width="2144" height="474" alt="flag4" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/4.png" />
+
 - **Final Finding:** The Entra ID Protection event classified the suspicious activity as `anonymizedIPAddress`.
 
 ### Flag 5 – Audit the verdict
@@ -273,7 +272,7 @@ CloudAppEvents
 <img width="2418" height="431" alt="flag11" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/11.2.png" />
 
 - **Final Finding:** Session ID `005d431a-380b-1f5e-e554-16d5010dc28e` was present in both SigninLogs and CloudAppEvents, confirming that the observed activities belonged to the same authenticated session.
-- 
+  
 ### Flag 12 – MFA Posture profiling
 - **Objective:** Identify the user's registered authentication methods and MFA posture.
 - **Data Source:** MicrosoftGraphActivityLogs
@@ -409,7 +408,8 @@ OfficeActivity
 	| summarize count() by Operation
 	| order by count_ desc
 ```
-<img width="2549" height="279" alt="flag13" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/22.png" />
+<img width="2549" height="279" alt="flag13" src="<img width="365" height="237" alt="image" src="https://github.com/user-attachments/assets/b777b12a-b568-48dc-b338-1a70f2a303e8" />
+" />
 
 - **Final Finding:** The attacker used the `FileDownloaded` operation to copy files from SharePoint and OneDrive to the local device. Unlike FileAccessed, which only records files being viewed within Microsoft 365, FileDownloaded indicates that a local copy of the file was created, making it evidence of data exfiltration.
   
@@ -424,7 +424,8 @@ OfficeActivity
 	| summarize count() by Operation
 	| order by count_ desc
 ```
-<img width="2549" height="279" alt="flag13" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/22.png" />
+<img width="2549" height="279" alt="flag13" src="<img width="365" height="237" alt="image" src="https://github.com/user-attachments/assets/5fb748a0-a536-4807-8e70-69c2643e6c94" />
+" />
 
 - **Final Finding:** `3 — the small number of downloads indicates focused exfiltration of specific documents, not opportunistic mass data theft`.
 
@@ -488,7 +489,8 @@ SigninLogs
 	| project TimeGenerated, AppDisplayName, ResourceDisplayName, SessionId
 	| order by TimeGenerated asc
 ```
-<img width="2507" height="492" alt="flag7" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/27.png" />
+<img width="2507" height="492" alt="flag7" src="<img width="960" height="192" alt="image" src="https://github.com/user-attachments/assets/e6afa956-1b52-4def-9ae8-7445cf477f35" />
+" />
 
 - **Final Finding:** The attacker accessed `Microsoft Flow Portal`, the Microsoft 365 service used to create and manage Power Automate workflows, indicating preparation for automated persistence.
 
@@ -556,7 +558,8 @@ MicrosoftGraphActivityLogs
 	| where TimeGenerated between (datetime(2026-06-10) .. datetime(2026-06-20 23:59:59))
 	| summarize by $table
 ```
-<img width="2507" height="492" alt="flag7" src="https://github.com/ShahAkshita31/Cyber-Range-Threat-Hunt-June-26/blob/main/evidence/33.png" />
+<img width="2507" height="492" alt="flag7" src="<img width="467" height="446" alt="33" src="https://github.com/user-attachments/assets/c255bd64-2d59-4697-946b-8a6ff1b6c583" />
+" />
 
 - **Final Finding:** The attacker IP appeared across `seven` distinct tables, demonstrating consistent evidence of activity throughout the investigation.
 
